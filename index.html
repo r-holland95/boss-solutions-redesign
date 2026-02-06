@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOSS Solutions — Help Desk, ITSM & 811 Damage Prevention Software</title>
+  <meta name="description" content="BOSS Solutions delivers award-winning ITSM help desk ticketing and 811 damage prevention software trusted by utilities, governments, and enterprises.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Favicon placeholder */
+    :root { color-scheme: dark; }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Mobile Menu (injected by JS) -->
+  <div id="site-header-wrapper"></div>
+
+  <!-- Main App Content (pages render here) -->
+  <div id="app"></div>
+
+  <!-- Footer (injected by JS) -->
+  <div id="site-footer-wrapper"></div>
+
+  <!-- Scripts -->
+  <script src="js/router.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/pages.js"></script>
+  <script>
+    // ─── Inject shared header & footer ───
+    document.getElementById('site-header-wrapper').innerHTML = renderHeader();
+    document.getElementById('site-footer-wrapper').innerHTML = renderFooter();
+
+    // ─── Header scroll effect ───
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ─── Register ALL routes ───
+    router
+      .on('/', pageHome)
+      .on('/bossdesk', pageBossDesk)
+      .on('/bossdesk-ai', pageBossDeskAI)
+      .on('/boss811', pageBoss811)
+      .on('/boss811-risk', pageBoss811Risk)
+      .on('/pricing', pagePricing)
+      .on('/services', pageServices)
+      .on('/support', pageSupport)
+      .on('/webinars', pageWebinars)
+      .on('/resources', pageWebinars)
+      .on('/success-stories', pageSuccessStories)
+      .on('/testimonials', pageTestimonials)
+      .on('/blog', pageBlog)
+      .on('/events', pageEvents)
+      .on('/press', pagePress)
+      .on('/about', pageAbout)
+      .on('/contact', pageContact)
+      .on('/demo', pageDemo)
+      .on('/partners', pagePartners)
+      .on('/privacy', pagePrivacy)
+      .on('/terms', pageTerms)
+      .on('/404', page404);
+
+    // ─── Initial route resolve ───
+    router.resolve();
+  </script>
+</body>
+</html>
