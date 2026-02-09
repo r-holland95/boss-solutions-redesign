@@ -332,12 +332,12 @@ body::before {
 .retention-visual { position: relative; }
 .retention-number {
   font-family: var(--font-display);
-  font-size: clamp(5rem, 12vw, 11rem);
+  font-size: clamp(4rem, 10vw, 9rem);
   font-weight: 800; letter-spacing: -0.04em; line-height: .9;
   background: linear-gradient(135deg, var(--accent), #33DFFF, var(--accent));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.retention-suffix { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 800; color: var(--text-primary); display: block; margin-top: -8px; }
+.retention-suffix { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2.4rem); font-weight: 800; color: var(--text-primary); display: block; margin-top: -8px; }
 .retention-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 300px; height: 300px; border: 1px solid rgba(0,212,255,.08); border-radius: 50%; animation: ringPulse 4s ease-in-out infinite; }
 .proof-badges { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 40px; }
 .proof-badge { display: flex; align-items: center; gap: 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 22px; }
@@ -525,6 +525,17 @@ body::before {
 .footer-legal a { color: var(--text-muted); font-size: .82rem; cursor: pointer; transition: color .3s; }
 .footer-legal a:hover { color: var(--text-primary); }
 
+/* ─── LAYOUT UTILITY CLASSES ─── */
+.grid-2col {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 6vw, 80px); align-items: start;
+}
+.grid-2col.align-center { align-items: center; }
+.grid-2col.narrow { max-width: 1040px; margin: 0 auto; }
+.grid-3col-partner {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+
 /* ═══════════════════════════════════════
    RESPONSIVE — TABLET
    ═══════════════════════════════════════ */
@@ -540,7 +551,7 @@ body::before {
   .bento-item.span-2 { grid-column: span 1; }
   .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; }
   .feature-list { grid-template-columns: 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .pricing-grid { grid-template-columns: 1fr !important; max-width: 480px; margin: 0 auto !important; }
   .news-grid { grid-template-columns: repeat(2, 1fr); }
   .form-row { grid-template-columns: 1fr; }
 }
@@ -554,6 +565,17 @@ body::before {
   }
   html { font-size: 15px; }
 
+  /* ── Fix Syne display font on mobile ── */
+  .page-hero h1,
+  .section-header h2,
+  .cta-inner h2,
+  .hero h1 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
   .nav-links, .nav-actions { display: none; }
   .hamburger { display: block; }
 
@@ -562,22 +584,31 @@ body::before {
   .hero-sub { font-size: 1rem; margin-bottom: 32px; }
   .hero-badge { font-size: .72rem; margin-bottom: 28px; padding: 6px 14px 6px 10px; }
   .hero-actions { flex-direction: column; }
-  .hero-actions .btn { width: 100%; justify-content: center; }
+  .hero-actions .btn { width: 100%; justify-content: center; text-align: center; }
   .hero-stats { flex-direction: column; gap: 28px; margin-top: 48px; padding-top: 32px; }
   .hero-stat h3 { font-size: 2rem; }
 
   .page-hero h1 { font-size: clamp(1.8rem, 7vw, 2.4rem); }
   .page-hero .hero-sub { font-size: .95rem; }
   .page-hero .hero-actions { flex-direction: column; }
-  .page-hero .hero-actions .btn { width: 100%; justify-content: center; }
+  .page-hero .hero-actions .btn { width: 100%; justify-content: center; text-align: center; }
 
   .section-header h2 { font-size: clamp(1.7rem, 6vw, 2.2rem); }
   .section-header p { font-size: .95rem; }
 
+  /* ── 99%+ retention number ── */
+  .retention-number { font-size: clamp(4rem, 16vw, 6rem) !important; }
+  .retention-suffix { font-size: clamp(1.4rem, 5vw, 1.8rem) !important; }
+
+  /* ── ALL grids → single column on mobile ── */
+  .grid-2col { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .grid-3col-partner { grid-template-columns: 1fr !important; gap: 16px !important; }
   .serve-grid { grid-template-columns: 1fr; gap: 16px; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .bento-grid { grid-template-columns: 1fr; gap: 14px; }
   .news-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr !important; max-width: 100% !important; }
+  .feature-list { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 40px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 
@@ -591,10 +622,10 @@ body::before {
   .cta-inner h2 { font-size: clamp(1.8rem, 6vw, 2.4rem); }
   .cta-inner p { font-size: .95rem; }
   .cta-actions { flex-direction: column; }
-  .cta-actions .btn { width: 100%; justify-content: center; }
+  .cta-actions .btn { width: 100%; justify-content: center; text-align: center; }
 
-  /* Two-col layouts go single on mobile */
-  [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  /* ── Buttons: always center text ── */
+  .btn { justify-content: center; text-align: center; }
 }
 
 @media (max-width: 480px) {
@@ -604,6 +635,8 @@ body::before {
   .hero h1 { font-size: 1.9rem; }
   .product-card { padding: 24px; }
   .serve-card { padding: 24px 20px; }
+  .retention-number { font-size: 3.5rem !important; }
+  .retention-suffix { font-size: 1.2rem !important; }
 }
   </style>
 </head>
@@ -1325,7 +1358,7 @@ function pagePricing() {
   </div></section>
   <section class="section alt"><div class="container">
     <div class="section-header center reveal"><h2>BOSS811® Plans</h2><p>Scalable plans for utilities, municipalities, and locating companies of all sizes.</p></div>
-    <div class="pricing-grid" style="max-width:720px;margin:0 auto;grid-template-columns:repeat(2,1fr);">
+    <div class="pricing-grid" style="max-width:720px;margin:0 auto;">
       <div class="pricing-card reveal"><h4>Standard</h4><div class="price" style="color:var(--accent-warm);">Custom</div><div class="price-note">Based on ticket volume</div><p class="price-desc">Core 811 ticket management.</p><ul class="pricing-features"><li>One Call Ticket Ingestion</li><li>Map-Based Workflows</li><li>Mobile Field App</li><li>Alerts & Notifications</li><li>Standard Reporting</li></ul><a class="btn btn-outline" style="width:100%;justify-content:center;" onclick="nav('/demo')">Get a Quote</a></div>
       <div class="pricing-card featured reveal reveal-delay-1" style="border-color:rgba(255,107,53,.25);box-shadow:0 0 40px var(--accent-warm-glow);"><h4>Premium</h4><div class="price" style="color:var(--accent-warm);">Custom</div><div class="price-note">Based on ticket volume</div><p class="price-desc">Full-featured damage prevention.</p><ul class="pricing-features"><li>Everything in Standard</li><li>Risk Identification Module</li><li>Damage Investigation</li><li>Facility Mapping & Annotation</li><li>ArcGIS Integration</li><li>Route Optimization</li><li>Advanced Analytics</li></ul><a class="btn btn-warm" style="width:100%;justify-content:center;" onclick="nav('/demo')">Get a Quote</a></div>
     </div>
@@ -1344,7 +1377,7 @@ function pageServices() {
     <p class="hero-sub">From implementation to ongoing support, our U.S.-based team ensures you get the most out of your BOSS Solutions investment.</p>
   </div></section>
   <section class="section"><div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px, 6vw, 80px);align-items:start;">
+    <div class="grid-2col">
       <div>
         <div class="section-header reveal" style="margin-bottom:40px;"><h2>Our approach to your success.</h2><p>Every BOSS Solutions customer gets access to our complete services portfolio.</p></div>
         <div class="timeline reveal">
@@ -1376,7 +1409,7 @@ function pageSupport() {
     <p class="hero-sub">Our 100% U.S.-based support team is here to help. Just a call or click away.</p>
   </div></section>
   <section class="section"><div class="container">
-    <div class="serve-grid" style="grid-template-columns:repeat(2,1fr);max-width:840px;margin:0 auto;">
+    <div class="serve-grid" style="max-width:840px;margin:0 auto;">
       <div class="serve-card reveal" style="text-align:center;">${icon('mail', 'cyan')}<h4>Email Support</h4><p>Send us an email and our team will respond promptly.</p><p style="color:var(--accent);font-weight:600;margin-top:12px;">support@boss-solutions.com</p></div>
       <div class="serve-card reveal reveal-delay-1" style="text-align:center;">${icon('phoneCall', 'cyan')}<h4>Phone Support</h4><p>Call our U.S.-based team for immediate assistance.</p><p style="color:var(--accent);font-weight:600;margin-top:12px;">678.684.1200</p></div>
       <div class="serve-card reveal" style="text-align:center;">${icon('message', 'cyan')}<h4>Support Portal</h4><p>Submit and track tickets through your dedicated portal.</p><a class="btn btn-ghost btn-sm" style="margin-top:12px;" href="https://forum.bossdesk.io/login" target="_blank">Open Portal</a></div>
@@ -1450,7 +1483,7 @@ function pageBlog() {
 function pageEvents() {
   document.getElementById('app').innerHTML = `
   <section class="page-hero"><div class="hero-bg-grid"></div><div class="hero-glow"></div><div class="container" style="position:relative;z-index:1;"><div class="section-label">Events</div><h1>Upcoming <span class="accent">Events</span></h1><p class="hero-sub">Meet the BOSS Solutions team at conferences and webinars throughout the year.</p></div></section>
-  <section class="section"><div class="container"><div class="news-grid" style="grid-template-columns:repeat(2,1fr);max-width:900px;margin:0 auto;">
+  <section class="section"><div class="container"><div class="news-grid" style="max-width:900px;margin:0 auto;">
     <div class="news-card reveal">${newsImg('calendar')}<div class="news-card-body"><div class="news-card-tag">Webinar — Feb 25, 2026</div><h4>BOSSDesk® 101 — Introduction Webinar</h4><p>2:00 PM ET — Featuring Bob Gruett.</p></div></div>
     <div class="news-card reveal reveal-delay-1">${newsImg('calendar')}<div class="news-card-body"><div class="news-card-tag">Conference — 2026</div><h4>Damage Prevention Convention & Expo</h4><p>See BOSS811 demos live at CGA Excavation Safety.</p></div></div>
     <div class="news-card reveal">${newsImg('calendar')}<div class="news-card-body"><div class="news-card-tag">Conference — 2026</div><h4>HDI Conference & Expo</h4><p>Connect with the BOSSDesk team at HDI's premier event.</p></div></div>
@@ -1478,7 +1511,7 @@ function pageAbout() {
   document.getElementById('app').innerHTML = `
   <section class="page-hero"><div class="hero-bg-grid"></div><div class="hero-glow"></div><div class="container" style="position:relative;z-index:1;"><div class="section-label">Company</div><h1>About <span class="accent">BOSS Solutions</span></h1><p class="hero-sub">For over 20 years, BOSS Solutions has delivered innovative software that helps organizations manage IT services and protect underground infrastructure.</p></div></section>
   <section class="section"><div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,6vw,80px);align-items:center;">
+    <div class="grid-2col align-center">
       <div class="reveal">
         <div class="section-label">Our Mission</div>
         <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:24px;">Empowering organizations to work smarter.</h2>
@@ -1503,7 +1536,7 @@ function pageContact() {
   document.getElementById('app').innerHTML = `
   <section class="page-hero"><div class="hero-bg-grid"></div><div class="hero-glow"></div><div class="container" style="position:relative;z-index:1;"><div class="section-label">Get in Touch</div><h1>Contact <span class="accent">Us</span></h1><p class="hero-sub">Have a question, need a quote, or want to learn more? Our team is ready to help.</p></div></section>
   <section class="section"><div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,6vw,80px);max-width:1040px;margin:0 auto;">
+    <div class="grid-2col narrow">
       <div>
         <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.4rem;margin-bottom:28px;">Send us a message</h3>
         <div id="contact-success" class="success-msg" style="margin-bottom:20px;">✓ Thank you! Your message has been sent.</div>
@@ -1532,7 +1565,7 @@ function pageDemo() {
   document.getElementById('app').innerHTML = `
   <section class="page-hero"><div class="hero-bg-grid"></div><div class="hero-glow"></div><div class="container" style="position:relative;z-index:1;"><div class="section-label">Get Started</div><h1>Request a <span class="accent">Demo</span></h1><p class="hero-sub">See BOSSDesk or BOSS811 in action with a personalized walkthrough. No commitment required.</p></div></section>
   <section class="section"><div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,6vw,80px);max-width:1040px;margin:0 auto;">
+    <div class="grid-2col narrow">
       <div>
         <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.4rem;margin-bottom:28px;">Schedule your demo</h3>
         <div id="demo-success" class="success-msg" style="margin-bottom:20px;">✓ Thank you! We'll be in touch within 1 business day.</div>
@@ -1568,7 +1601,7 @@ function pagePartners() {
   document.getElementById('app').innerHTML = `
   <section class="page-hero"><div class="hero-bg-grid"></div><div class="hero-glow"></div><div class="container" style="position:relative;z-index:1;"><div class="section-label">Partners</div><h1>Partner <span class="accent">Program</span></h1><p class="hero-sub">Join the BOSS Solutions partner ecosystem. Programs built for mutual growth.</p></div></section>
   <section class="section"><div class="container">
-    <div class="serve-grid" style="grid-template-columns:repeat(3,1fr);">
+    <div class="grid-3col-partner">
       <div class="serve-card reveal">${icon('users', 'cyan')}<h4>Reseller Partners</h4><p>Sell BOSSDesk and BOSS811 with full sales and technical support.</p></div>
       <div class="serve-card reveal reveal-delay-1">${icon('link', 'cyan')}<h4>Technology Partners</h4><p>Integrate your products with BOSS Solutions to create joint solutions.</p></div>
       <div class="serve-card reveal reveal-delay-2">${icon('clipboard', 'cyan')}<h4>Consulting Partners</h4><p>Recommend and implement BOSS Solutions for your clients.</p></div>
